@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="whiteSpace" nsURI="http://www.soton.ac/java/whitespace/WhiteSpace"
+    nsPrefix="whiteSpace">
+  <eClassifiers xsi:type="ecore:EClass" name="WSProgram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StackManipulation" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Push" eSuperTypes="#//StackManipulation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Duplicate" eSuperTypes="#//StackManipulation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Copy" eSuperTypes="#//StackManipulation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Swap" eSuperTypes="#//StackManipulation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Discard" eSuperTypes="#//StackManipulation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Slide" eSuperTypes="#//StackManipulation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Addition" eSuperTypes="#//Arithmetic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//Arithmetic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiplication" eSuperTypes="#//Arithmetic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//Arithmetic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Modulo" eSuperTypes="#//Arithmetic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HeapAccess" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Store" eSuperTypes="#//HeapAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Retrieve" eSuperTypes="#//HeapAccess"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowControl" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MarkLocation" eSuperTypes="#//FlowControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CallSubroutine" eSuperTypes="#//FlowControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnconditionalJump" eSuperTypes="#//FlowControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ZeroJump" eSuperTypes="#//FlowControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NegativeJump" eSuperTypes="#//FlowControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EndSubroutine" eSuperTypes="#//FlowControl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EndProgram" eSuperTypes="#//FlowControl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IO" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputCharacter" eSuperTypes="#//IO"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputNumber" eSuperTypes="#//IO"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReadCharacter" eSuperTypes="#//IO"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReadNumber" eSuperTypes="#//IO"/>
+</ecore:EPackage>

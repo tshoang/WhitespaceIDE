@@ -1,0 +1,217 @@
+grammar ac.soton.java.whitespace.WhiteSpace hidden (NOTWS, ML_COMMENT)
+
+generate whiteSpace "http://www.soton.ac/java/whitespace/WhiteSpace"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+WSProgram:
+	statements +=Statement+
+;
+
+
+Statement:
+	StackManipulation |
+	Arithmetic |
+	HeapAccess |
+	FlowControl |
+	IO
+;
+
+/*
+ * Stack manipulation (IMP = [SPACE])
+ */
+StackManipulation:
+	SPACE // The Instruction Modification Parameter (IMP) for Stack manipulation
+	(Push | Duplicate | Copy | Swap | Discard | Slide)
+;
+
+Push:
+	{Push}
+	SPACE number=Number
+;
+
+Duplicate:
+	{Duplicate}
+	LF SPACE
+;
+
+Copy:
+	{Copy}
+	TAB SPACE number=Number
+;
+
+Swap:
+	{Swap}
+	LF TAB
+;
+
+Discard:
+	{Discard}
+	LF LF
+;
+
+Slide:
+	{Slide}
+	TAB LF number=Number
+;
+
+/*
+ * Arithmetic (IMP = [TAB][SPACE])
+ */
+Arithmetic:
+	TAB SPACE // The Instruction Modification Parameter (IMP) for Arithmetic
+	(Addition | Subtraction | Multiplication | Division | Modulo) 
+;
+
+Addition:
+	{Addition}
+	SPACE SPACE
+;
+
+Subtraction:
+	{Subtraction}
+	SPACE TAB
+;
+
+Multiplication:
+	{Multiplication}
+	SPACE LF
+;
+
+Division:
+	{Division}
+	TAB SPACE
+;
+
+Modulo:
+	{Modulo}
+	TAB TAB
+;
+
+/*
+ * Heap Access(IMP = [TAB][TAB])
+ */
+HeapAccess:
+	TAB TAB // The Instruction Modification Parameter (IMP) for Heap Access
+	(Store | Retrieve)
+;
+
+Store:
+	{Store}
+	SPACE
+;
+
+Retrieve:
+	{Retrieve}
+	TAB
+;
+
+/*
+ * Heap Access(IMP = [LF])
+ */
+FlowControl:
+	LF // The Instruction Modification Parameter (IMP) for Flow Control
+	(
+		MarkLocation | 
+		CallSubroutine |
+		UnconditionalJump | 
+		ZeroJump | 
+		NegativeJump | 
+		EndSubroutine | 
+		EndProgram
+	)
+;
+
+MarkLocation:
+	{MarkLocation}
+	SPACE SPACE label=Label
+;
+
+CallSubroutine:
+	{CallSubroutine}
+	SPACE TAB label=Label
+;
+
+UnconditionalJump:
+	{UnconditionalJump}
+	SPACE LF label=Label
+;
+
+ZeroJump:
+	{ZeroJump}
+	TAB SPACE label=Label
+;
+
+NegativeJump:
+	{NegativeJump}
+	TAB TAB label=Label
+;
+
+EndSubroutine:
+	{EndSubroutine}
+	TAB LF
+;
+
+EndProgram:
+	{EndProgram}
+	LF LF
+;
+
+/*
+ * I/O (IMP = [T][LF])
+ */
+IO:
+	TAB LF // The Instruction Modification Parameter (IMP) for I/O
+	(
+		OutputCharacter | 
+		OutputNumber |
+		ReadCharacter | 
+		ReadNumber
+	)
+;
+
+OutputCharacter:
+	{OutputCharacter}
+	SPACE SPACE
+;
+
+OutputNumber:
+	{OutputNumber}
+	SPACE TAB
+;
+
+ReadCharacter:
+	{ReadCharacter}
+	TAB SPACE
+;
+
+ReadNumber:
+	{ReadNumber}
+	TAB TAB
+;
+
+/*
+ * The data rules for numbers and labels (required value converter)
+ */
+Number returns ecore::EInt:
+	(SPACE|TAB)+ LF
+;
+
+Label returns ecore::EString:
+	(SPACE|TAB)+ LF
+;
+
+/*
+ * The terminal rules for space, tab, line-feed and others (i.e., not white space)
+ */
+terminal ML_COMMENT : '/*' -> '*/';
+
+terminal SPACE: ' ';
+
+terminal TAB: '\t';
+
+terminal LF: '\n';
+
+terminal NOTWS:
+	(!(' '|'\t'|'\n'))+
+;

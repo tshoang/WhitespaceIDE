@@ -1,0 +1,30 @@
+# Gradle folder
+.gradle
+
+# LaTeX generated files
+*.aux
+*.bbl
+*.blg
+*.ilg
+*.log
+*.nav
+*.nlo
+*.nls
+*.rel
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+
+# Java generated files
+*.class
+
+# Rodin generated files
+*.bcc
+*.bcm
+*.bpo
+*.bps
+
+# Python
+__pycache__
